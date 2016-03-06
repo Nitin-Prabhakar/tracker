@@ -1,0 +1,28 @@
+<dom-module id="upload-form">
+    <template>
+        <div class="jumbotron" id="uploader">
+            <h1>{{customheader}}</h1>
+            <form action="../index.php" method="post" enctype="multipart/form-data">	    
+                <div class="form-group">
+    		      <input type="file" name="fileToUpload" id="fileToUpload">
+                </div>
+                <div class="form-group">
+    		       <input type="submit" value="Load tracker" name="submit" class="btn btn-default">
+                </div>
+    		</form>
+        </div>
+    </template>
+
+    <script>
+    	Polymer({
+    		is: "upload-form",
+            properties:{
+                customheader:{
+                    type:String,
+                    value:"Hello world"
+                }
+            }
+    	});
+    </script>
+    
+</dom-module>
