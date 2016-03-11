@@ -32,7 +32,8 @@ class trackerController {
 		}
 		$this->oReader->close();
 		//create named columns from rows[0]
-
+        //echo "<pre>";
+        //print_r($rows);
 
 		for ($i=1;$i<count($rows);$i++){
 			for($j=0;$j<count($rows[0]);$j++){
@@ -40,16 +41,13 @@ class trackerController {
 				$key= strtolower($rows[0][$j]);
 				//echo $key."\n";
 				if(in_array($key, ["dob","deliverydate"])){
-					if(!is_object($rows[$i][$j])){
-						if(gettype($rows[$i][$j])=="integer"){
-							$timestamp = ($rows[$i][$j] - 25569) * 86400;					
-							$namedCols[$i][$rows[0][$j]] = date("Y-m-d",$timestamp);
-						}elseif (gettype($rows[$i][$j])=="string") {
-							$namedCols[$i][$rows[0][$j]] = $rows[$i][$j];
-						}
-					}else{
-						$namedCols[$i][$rows[0][$j]] = $rows[$i][$j]->date;
-					}
+					if(gettype($rows[$i][$j])=="integer"){
+                            $timestamp = ($rows[$i][$j] - 25569) * 86400;                   
+                            $namedCols[$i][$rows[0][$j]] = date("Y-m-d",$timestamp);
+                    }else{
+                            //throw exception
+                            //$namedCols[$i][$rows[0][$j]] = $rows[$i][$j];
+                    }
 				}
 				else{
 				 $namedCols[$i][$rows[0][$j]] = $rows[$i][$j];
@@ -85,25 +83,33 @@ class trackerController {
     			switch($sK){
     				case "reference":
     					$k1 = "Ref. No";
+                        $v1 = $v;
     					break;
     				case "applicant":
     					$k1 = "Applicant's name";
+                        $v1 = $v;
     					break;
     				case "father":
     					$k1 = "Father's name";
+                        $v1 = $v;
     					break;
     				case "dob":
     					$k1 = "Date of birth";
+                        $timestamp = strtotime($v);
+                        $v1 = date("d-M-Y",$timestamp);
     					break;
     				case "deliverydate":
     					$k1 = "Date of information from police station";
+                        $timestamp = strtotime($v);
+                        $v1 = date("d-M-Y",$timestamp);
     					break;
     				default:
     					$k1 = $k;
+                        $v1 = $v;
     			}
-    			$this->aPoliceVerification[$key][$k1] = $v;
+    			$this->aPoliceVerification[$key][$k1] = $v1;
     			if(!in_array($sK, ["reference","deliverydate"])){
-    				$this->aCourtVerification[$key][$k1] = $v;
+    				$this->aCourtVerification[$key][$k1] = $v1;
     			}
     		} 
     		$this->aPoliceVerification[$key]["Police station"] = "";   		
@@ -156,8 +162,8 @@ class trackerController {
 
         foreach($this->aPoliceVerification[$key] as $index=>$value){
         	$table->addRow();
-			$table->addCell(5000)->addText("{$index}",array('name'=>'Calibri', 'size'=>'10','bold'=>true,'align'=>'center'));
-			$table->addCell(5000)->addText("{$value}",array('name'=>'Calibri', 'size'=>'10','bold'=>true,'align'=>'center'));
+			$table->addCell(5000)->addText("  {$index}",array('name'=>'Calibri', 'size'=>'10','bold'=>true,'align'=>'center'));
+			$table->addCell(5000)->addText("  {$value}",array('name'=>'Calibri', 'size'=>'10','bold'=>true,'align'=>'center'));
         }
 
         //------------------End Police Verification--------------------------------
@@ -170,8 +176,8 @@ class trackerController {
 
         foreach($this->aCourtVerification[$key] as $index=>$value){
         	$table->addRow();
-			$table->addCell(5000)->addText("{$index}",array('name'=>'Calibri', 'size'=>'10','bold'=>true,'align'=>'center'));
-			$table->addCell(5000)->addText("{$value}",array('name'=>'Calibri', 'size'=>'10','bold'=>true,'align'=>'center'));
+			$table->addCell(5000)->addText("  {$index}",array('name'=>'Calibri', 'size'=>'10','bold'=>true,'align'=>'center'));
+			$table->addCell(5000)->addText("  {$value}",array('name'=>'Calibri', 'size'=>'10','bold'=>true,'align'=>'center'));
         }
 
         //------------------End Court Verification--------------------------------
@@ -185,10 +191,10 @@ class trackerController {
 		$table = $section->addTable('customStyledTable');
 
 		$table->addRow();
-		$table->addCell(5000)->addText("Court",array('name'=>'Calibri', 'size'=>'10','bold'=>true,'align'=>'center'));
-		$table->addCell(5000)->addText("Jurisdiction",array('name'=>'Calibri', 'size'=>'10','bold'=>true,'align'=>'center'));
-		$table->addCell(5000)->addText("Location",array('name'=>'Calibri', 'size'=>'10','bold'=>true,'align'=>'center'));
-		$table->addCell(5000)->addText("Verification remarks",array('name'=>'Calibri', 'size'=>'10','bold'=>true,'align'=>'center'));
+		$table->addCell(5000)->addText(" Court",array('name'=>'Calibri', 'size'=>'10','bold'=>true,'align'=>'center'));
+		$table->addCell(5000)->addText(" Jurisdiction",array('name'=>'Calibri', 'size'=>'10','bold'=>true,'align'=>'center'));
+		$table->addCell(5000)->addText(" Location",array('name'=>'Calibri', 'size'=>'10','bold'=>true,'align'=>'center'));
+		$table->addCell(5000)->addText(" Verification remarks",array('name'=>'Calibri', 'size'=>'10','bold'=>true,'align'=>'center'));
 
 		$table->addRow();
 		$table->addCell(5000)->addText("Magistrate");

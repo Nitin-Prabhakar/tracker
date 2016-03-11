@@ -5,7 +5,7 @@ use Box\Spout\Reader\ReaderFactory;
 use Box\Spout\Common\Type;
 
 
-echo "<pre>";
+
 $oReader = ReaderFactory::create(Type::XLSX);
 
 if(isset( $_FILES ) && !empty($_FILES) && isset($_POST)){
