@@ -30,7 +30,7 @@ class trackerModel{
 		}
 
 		$sBoundColumns = implode(",", $aColumnBinder);
-		
+
 		foreach ($aTracker as $index=>$aRow){
 			//print_r($aRow);
 
@@ -39,17 +39,18 @@ class trackerModel{
 			try{
 				$sSql = $this->db->link->prepare("INSERT INTO trackerapp ({$sColumns}) VALUES ({$sBoundColumns})");
 				foreach($this->aColumns as $key=>$value){
-					$sSql->bindParam(":$value", $aRow[$value]);					
-				}				
+					$sSql->bindParam(":$value", $aRow[$value]);
+				}
 				$sSql->execute();
 			}catch(PDOException $e){
+
 				echo "Error: " . $e->getMessage();
 			}
 		}
 
 
 	}
-		
+
 }
 
 ?>

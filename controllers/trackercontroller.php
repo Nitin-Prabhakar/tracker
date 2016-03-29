@@ -1,8 +1,8 @@
 <?php
 require_once "./models/trackermodel.php";
 require_once "PHPWord.php";
-class trackerController { 
-    
+class trackerController {
+
 	private $oReader;
 	public $sTargetFile;
 	private $oModel;
@@ -15,19 +15,27 @@ class trackerController {
     	$this->oReader = $oReader;
     	$this->oModel = new trackerModel;
     }
-    
-    Private function readTracker() { 
+
+    Private function readTracker() {
 
     	$this->oReader->open($this->sTargetFile);
         foreach ($this->oReader->getSheetIterator() as $sheet) {
 		    foreach ($sheet->getRowIterator() as $row) {
-
+                $aRow = null;
 		    	for($i=0;$i<count($row);$i++){
+                    if(empty($row[$i])){
+                        $aRow = null;
+                        continue;
+                    }
 		    		if(gettype($row[$i])=="string"){
-		    			$row[$i] = iconv('UTF-8', 'ASCII//TRANSLIT',$row[$i]);
-		    		}
+		    			$aRow[$i] = iconv('UTF-8', 'ASCII//TRANSLIT',$row[$i]);
+		    		}else{
+                        $aRow[$i] = $row[$i];
+                    }
 		    	}
-		        $rows[] = $row;
+
+                if($aRow!=null)
+		          $rows[] = $aRow;
 		    }
 		}
 		$this->oReader->close();
@@ -42,7 +50,7 @@ class trackerController {
 				//echo $key."\n";
 				if(in_array($key, ["dob","deliverydate"])){
 					if(gettype($rows[$i][$j])=="integer"){
-                            $timestamp = ($rows[$i][$j] - 25569) * 86400;                   
+                            $timestamp = ($rows[$i][$j] - 25569) * 86400;
                             $namedCols[$i][$rows[0][$j]] = date("Y-m-d",$timestamp);
                     }else{
                             //throw exception
@@ -55,7 +63,7 @@ class trackerController {
 			}
 		}
 		$this->aTracker = $namedCols;
-    } 
+    }
 
     function readAndLoadTracker(){
 
@@ -111,31 +119,31 @@ class trackerController {
     			if(!in_array($sK, ["reference","deliverydate"])){
     				$this->aCourtVerification[$key][$k1] = $v1;
     			}
-    		} 
-    		$this->aPoliceVerification[$key]["Police station"] = "";   		
-    		$this->aPoliceVerification[$key]["Ph no of Police station"] = "";   		
-    		$this->aPoliceVerification[$key]["Designation of the interviewed police officer"] = "SHO (Station House Officer)";   		
+    		}
+    		$this->aPoliceVerification[$key]["Police station"] = "";
+    		$this->aPoliceVerification[$key]["Ph no of Police station"] = "";
+    		$this->aPoliceVerification[$key]["Designation of the interviewed police officer"] = "SHO (Station House Officer)";
     		$this->aPoliceVerification[$key]["Number of years covered in the police verification"] = "Last 2 years";
-    		$this->aPoliceVerification[$key]["Verification remarks"] = "No records";   		   		
+    		$this->aPoliceVerification[$key]["Verification remarks"] = "No records";
     	}
     	//print_r($this->aTracker);
 		//print_r($this->aPoliceVerification);
 		//print_r($this->aCourtVerification);
-    	
+
     }
 
     public function writeFromTracker($key){
 
     	$oPHPWord = new PHPWord();
     	$nameOfFile = $this->sFolder.$this->aTracker[$key]['Applicant'].uniqid().'.docx';
-    	
+
 
 
     	// Define table style arrays
 		$styleTable = array('borderSize'=>6, 'borderColor'=>'000');
 		$oPHPWord->addTableStyle('customStyledTable', $styleTable);
 
-		$oPHPWord->addParagraphStyle('pStyle', array('align'=>'left', 'size'=>11, 'spaceAfter'=>1, 'name'=>'calibri', 'bold'=>true));
+		$oPHPWord->addParagraphStyle('pStyle', array('align'=>'left', 'size'=>11, 'spaceAfter'=>1, 'name'=>'Calibri', 'bold'=>true));
 
 		//Header
 
@@ -149,12 +157,12 @@ class trackerController {
 
 
 		$section->addText('To',array('name'=>'Calibri', 'size'=>'10','bold'=>true,'align'=>'left'));
-		
+
         $section->addText('M/s A-Check Global',array('name'=>'Calibri', 'size'=>'10','bold'=>true,'align'=>'left'));
-        
+
         $section->addText('This information is given with regard to the check conducted for:',array('name'=>'Calibri', 'size'=>'10','bold'=>true,'align'=>'left'));
 
-
+        //$section->addTextBreak(1);
         //Police Verification
 
         $section->addText('Police Verification',array('name'=>'Calibri', 'size'=>'10','bold'=>true,'align'=>'center'));
@@ -162,12 +170,12 @@ class trackerController {
 
         foreach($this->aPoliceVerification[$key] as $index=>$value){
         	$table->addRow();
-			$table->addCell(5000)->addText("  {$index}",array('name'=>'Calibri', 'size'=>'10','bold'=>true,'align'=>'center'));
-			$table->addCell(5000)->addText("  {$value}",array('name'=>'Calibri', 'size'=>'10','bold'=>true,'align'=>'center'));
+			$table->addCell(5000)->addText(" {$index}",array('name'=>'Calibri', 'size'=>'10','bold'=>true,'align'=>'center'));
+			$table->addCell(5000)->addText(" {$value}",array('name'=>'Calibri', 'size'=>'10','bold'=>true,'align'=>'center'));
         }
 
         //------------------End Police Verification--------------------------------
-
+        //$section->addTextBreak(1);
 
          //Court Verification
 
@@ -176,13 +184,13 @@ class trackerController {
 
         foreach($this->aCourtVerification[$key] as $index=>$value){
         	$table->addRow();
-			$table->addCell(5000)->addText("  {$index}",array('name'=>'Calibri', 'size'=>'10','bold'=>true,'align'=>'center'));
-			$table->addCell(5000)->addText("  {$value}",array('name'=>'Calibri', 'size'=>'10','bold'=>true,'align'=>'center'));
+			$table->addCell(5000)->addText(" {$index}",array('name'=>'Calibri', 'size'=>'10','bold'=>true,'align'=>'center'));
+			$table->addCell(5000)->addText(" {$value}",array('name'=>'Calibri', 'size'=>'10','bold'=>true,'align'=>'center'));
         }
 
         //------------------End Court Verification--------------------------------
 
-
+        //$section->addTextBreak(1);
         //Result
 
 
@@ -191,16 +199,16 @@ class trackerController {
 		$table = $section->addTable('customStyledTable');
 
 		$table->addRow();
-		$table->addCell(5000)->addText(" Court",array('name'=>'Calibri', 'size'=>'10','bold'=>true,'align'=>'center'));
-		$table->addCell(5000)->addText(" Jurisdiction",array('name'=>'Calibri', 'size'=>'10','bold'=>true,'align'=>'center'));
-		$table->addCell(5000)->addText(" Location",array('name'=>'Calibri', 'size'=>'10','bold'=>true,'align'=>'center'));
-		$table->addCell(5000)->addText(" Verification remarks",array('name'=>'Calibri', 'size'=>'10','bold'=>true,'align'=>'center'));
+		$table->addCell(5000)->addText("Court",array('name'=>'Calibri', 'size'=>'10','bold'=>true,'align'=>'center'));
+		$table->addCell(5000)->addText("Jurisdiction",array('name'=>'Calibri', 'size'=>'10','bold'=>true,'align'=>'center'));
+		$table->addCell(5000)->addText("Location",array('name'=>'Calibri', 'size'=>'10','bold'=>true,'align'=>'center'));
+		$table->addCell(5000)->addText("Verification remarks",array('name'=>'Calibri', 'size'=>'10','bold'=>true,'align'=>'center'));
 
 		$table->addRow();
-		$table->addCell(5000)->addText("Magistrate");
-		$table->addCell(5000)->addText("Metropolitan Magistrate / Judicial Magistrate ");
+		$table->addCell(5000)->addText(" Magistrate");
+		$table->addCell(5000)->addText(" Metropolitan Magistrate / Judicial Magistrate ");
 		$table->addCell(5000)->addText(" ---");
-		$table->addCell(5000)->addText("No records");
+		$table->addCell(5000)->addText(" No records");
 
 
         //-----------------------------End result---------_------------
@@ -224,23 +232,23 @@ class trackerController {
         $footer = $section->createFooter();
         $table = $footer->addTable('footerTable',$styleTable);
 		$table->addRow();
-        $table->addCell(150)->addImage('sign.png', array('width'=>100, 'height'=>100, 'align'=>'left'));
-        $table->addCell(9850)->addImage('seal.jpg', array('width'=>100, 'height'=>100, 'align'=>'left'));
+        $table->addCell(10000)->addImage('signature.png', array('width'=>250, 'height'=>250, 'align'=>'left'));
+        /*$table->addCell(9850)->addImage('seal.jpg', array('width'=>100, 'height'=>100, 'align'=>'left'));
         $table->addRow();
         $table->addCell(5000)->addText('S.Shylaja',array('name'=>'Calibri', 'size'=>'10','bold'=>true,'align'=>'left'));
         $table->addRow();
         $table->addCell(5000)->addText('Advocate & Notary',array('name'=>'Calibri', 'size'=>'10','bold'=>true,'align'=>'left'));
         $table->addRow();
-        $table->addCell(5000)->addText('SS Law Associates',array('name'=>'Calibri', 'size'=>'10','bold'=>true,'align'=>'left'));
+        $table->addCell(5000)->addText('SS Law Associates',array('name'=>'Calibri', 'size'=>'10','bold'=>true,'align'=>'left'));*/
 
         //----------------------------End Footer---------------------------------------
 
 		$objWriter = PHPWord_IOFactory::createWriter($oPHPWord, 'Word2007');
 		$objWriter->save($nameOfFile);
 		chmod($nameOfFile, 0777);
-    	
+
     }
-} 
+}
 
 
 ?>
