@@ -232,7 +232,7 @@ class trackerController {
         $footer = $section->createFooter();
         $table = $footer->addTable('footerTable',$styleTable);
 		$table->addRow();
-        $table->addCell(10000)->addImage('signature.png', array('width'=>250, 'height'=>250, 'align'=>'left'));
+        $table->addCell(10000)->addImage('signature.png', array('width'=>180, 'height'=>180, 'align'=>'left'));
         /*$table->addCell(9850)->addImage('seal.jpg', array('width'=>100, 'height'=>100, 'align'=>'left'));
         $table->addRow();
         $table->addCell(5000)->addText('S.Shylaja',array('name'=>'Calibri', 'size'=>'10','bold'=>true,'align'=>'left'));
