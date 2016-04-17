@@ -141,7 +141,9 @@ class trackerController {
 
     	// Define table style arrays
 		$styleTable = array('borderSize'=>6, 'borderColor'=>'000');
+        $styleTableSectionHeaders = array('borderSize'=>0, 'borderColor'=>'white');
 		$oPHPWord->addTableStyle('customStyledTable', $styleTable);
+        $oPHPWord->addTableStyle('customStyledSectionHeaders', $styleTableSectionHeaders);
 
 		$oPHPWord->addParagraphStyle('pStyle', array('align'=>'left', 'size'=>11, 'spaceAfter'=>1, 'name'=>'Calibri', 'bold'=>true));
 
@@ -165,7 +167,14 @@ class trackerController {
         //$section->addTextBreak(1);
         //Police Verification
 
-        $section->addText('Police Verification',array('name'=>'Calibri', 'size'=>'10','bold'=>true,'align'=>'center'));
+       // $section->addText('Police Verification',array('name'=>'Calibri', 'size'=>'10','bold'=>true,'align'=>'center'));
+        $sectionHeader = $section->addTable('customStyledSectionHeaders');
+        $sectionHeader->addRow();
+        $sectionHeader->addCell(4000)->addText('');
+        $sectionHeader->addCell(2000)->addText('Police Verification',array('name'=>'Calibri', 'size'=>'10','bold'=>true,'align'=>'center'));
+        $sectionHeader->addCell(4000)->addText('');
+
+
         $table = $section->addTable('customStyledTable');
 
         foreach($this->aPoliceVerification[$key] as $index=>$value){
@@ -179,7 +188,15 @@ class trackerController {
 
          //Court Verification
 
-        $section->addText('Court Verification',array('name'=>'Calibri', 'size'=>'10','bold'=>true,'align'=>'center'));
+        //$section->addText('Court Verification',array('name'=>'Calibri', 'size'=>'10','bold'=>true,'align'=>'center'));
+
+        $sectionHeader = $section->addTable('customStyledSectionHeaders');
+        $sectionHeader->addRow();
+        $sectionHeader->addCell(4000)->addText('');
+        $sectionHeader->addCell(2000)->addText('Court Verification',array('name'=>'Calibri', 'size'=>'10','bold'=>true,'align'=>'center'));
+        $sectionHeader->addCell(4000)->addText('');
+
+
         $table = $section->addTable('customStyledTable');
 
         foreach($this->aCourtVerification[$key] as $index=>$value){
@@ -194,8 +211,16 @@ class trackerController {
         //Result
 
 
-        $section->addText('Result',array('name'=>'Calibri', 'size'=>'10','bold'=>true,'align'=>'center'));
+        //$section->addText('Result',array('name'=>'Calibri', 'size'=>'10','bold'=>true,'align'=>'center'));
 			//$section->addTextBreak(1);
+        $sectionHeader = $section->addTable('customStyledSectionHeaders');
+        $sectionHeader->addRow();
+        $sectionHeader->addCell(4000)->addText('');
+        $sectionHeader->addCell(4000)->addText('Result',array('name'=>'Calibri', 'size'=>'10','bold'=>true,'align'=>'center'));
+        $sectionHeader->addCell(2000)->addText('');
+
+
+
 		$table = $section->addTable('customStyledTable');
 
 		$table->addRow();
