@@ -20,7 +20,7 @@ class trackerModel{
 						"table"=>"Clients",
 						"key"=>"client"
 				  ]
-	]
+	];
 
 	function __construct(){
 
@@ -54,7 +54,7 @@ class trackerModel{
 					if(array_key_exists($value, $this->aRelatives)){
 						$tab = $this->aRelatives[$value]['table'];
 						$col = $this->aRelatives[$value]['key'];
-						$sFkQuery =
+						//$sFkQuery =
 					}
 					$sSql->bindParam(":$value", $aRow[$value]);
 				}

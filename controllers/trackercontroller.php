@@ -49,7 +49,7 @@ class trackerController {
                             $namedCols[$i][$rows[0][$j]] = date("Y-m-d",$timestamp);
                     }else{
                             //throw exception
-                            //$namedCols[$i][$rows[0][$j]] = $rows[$i][$j];
+                            $namedCols[$i][$rows[0][$j]] = $rows[$i][$j];
                     }
 				}
 				else{
@@ -68,7 +68,8 @@ class trackerController {
     }
 
     Private function loadTracker(){
-
+        echo "<pre>";
+        print_r($this->aTracker);
     	//$this->oModel->load($this->aTracker);
     }
 
@@ -84,29 +85,13 @@ class trackerController {
     			$k1=null;
     			$sK = strtolower($k);
     			switch($sK){
-                    case "contact":
-                        $k1 = "Contact Number";
-                        $v1 = $v;
-                        break;
-                    case "customer-id":
-                        $k1 = "Customer ID";
-                        $v1 = $v;
-                        break;
-    				case "reference":
-    					$k1 = "Ref. No";
-                        $v1 = $v;
-    					break;
-    				case "applicant":
+    				case "name":
                         if($this->client=="PAMAC"){
                             $k1 = "Name of the Subject";
                         }
                         else{
     					    $k1 = "Applicant's name";
                         }
-                        $v1 = $v;
-    					break;
-    				case "father":
-    					$k1 = "Father's name";
                         $v1 = $v;
     					break;
     				case "dob":
