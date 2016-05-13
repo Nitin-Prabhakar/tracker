@@ -30,7 +30,7 @@ if(isset( $_FILES ) && !empty($_FILES) && isset($_POST)){
 
 	$aTracker = $oTracker->__getTracker();
 
-	/*$oTracker->createBucketsForPoliceAndCourt();
+	$oTracker->createBucketsForPoliceAndCourt();
 
 
 	//print_r($aNamedCols);exit();
@@ -39,7 +39,7 @@ if(isset( $_FILES ) && !empty($_FILES) && isset($_POST)){
 		# code...
 
 		$oTracker->writeFromTracker($key);
-	}*/
+	}
 }
 
 ?>
