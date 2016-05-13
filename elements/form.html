@@ -2,9 +2,17 @@
     <template>
         <div class="jumbotron" id="uploader">
             <h1>{{customheader}}</h1>
-            <form action="../index.php" method="post" enctype="multipart/form-data">	    
+            <form action="../index.php" method="post" enctype="multipart/form-data">
                 <div class="form-group">
     		      <input type="file" name="fileToUpload" id="fileToUpload">
+                  <ul>
+                    <li>
+                        <input type="radio" name="client" value="PAMAC">PAMAC</input>
+                    </li>
+                    <li>
+                        <input type="radio" name="client" value="A-check">A-check</input>
+                    </li>
+                  </ul>
                 </div>
                 <div class="form-group">
     		       <input type="submit" value="Load tracker" name="submit" class="btn btn-default">
@@ -12,7 +20,12 @@
     		</form>
         </div>
     </template>
-
+    <style type="text/css">
+        li{
+            list-style: none;
+            text-indent:
+        }
+    </style>
     <script>
     	Polymer({
     		is: "upload-form",
@@ -24,5 +37,5 @@
             }
     	});
     </script>
-    
+
 </dom-module>

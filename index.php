@@ -10,12 +10,12 @@ $oReader = ReaderFactory::create(Type::XLSX);
 
 if(isset( $_FILES ) && !empty($_FILES) && isset($_POST)){
 
+	$oTracker = new trackerController($oReader);
+	$oTracker->client =  $_POST['client'];
 
-	$oTracker = new trackerController($oReader);			
-	
 	$sName = str_ireplace(".xlsx", "", $_FILES["fileToUpload"]["name"]);
 
-	$oTracker->sFolder = "trackers/{$sName}/".time()."/";
+	$oTracker->sFolder = "trackers/{$oTracker->client}/{$sName}/".time()."/";
 
 	if (!file_exists( $oTracker->sFolder )) {
 		mkdir($oTracker->sFolder,0777,true);
@@ -24,12 +24,13 @@ if(isset( $_FILES ) && !empty($_FILES) && isset($_POST)){
 	$oTracker->sTargetFile = $oTracker->sFolder.basename($_FILES["fileToUpload"]["name"]);
 
 	move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $oTracker->sTargetFile);
-	
+
+
 	$oTracker->readAndLoadTracker();
 
 	$aTracker = $oTracker->__getTracker();
 
-	$oTracker->createBucketsForPoliceAndCourt();
+	/*$oTracker->createBucketsForPoliceAndCourt();
 
 
 	//print_r($aNamedCols);exit();
@@ -38,19 +39,19 @@ if(isset( $_FILES ) && !empty($_FILES) && isset($_POST)){
 		# code...
 
 		$oTracker->writeFromTracker($key);
-	}
+	}*/
 }
 
 ?>
 
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html>
 	<head>
 
 		<title>Tracker App</title>
 
-		<script src="bower_components/jquery/dist/jquery.min.js"></script>	
-		
+		<script src="bower_components/jquery/dist/jquery.min.js"></script>
+
 		<script type="text/javascript" src="bower_components/webcomponentsjs/webcomponents.min.js"></script>
 
 		<link rel="import" href="bower_components/polymer/polymer.html">
@@ -69,11 +70,11 @@ if(isset( $_FILES ) && !empty($_FILES) && isset($_POST)){
 		<script>
 			$(document).ready(function(){
 				//$( "#tracker-loader" ).submit(function( event ) {
-	                
+
             	//});
 			});
-            
 
-    	</script>	
+
+    	</script>
 	</body>
 </html>

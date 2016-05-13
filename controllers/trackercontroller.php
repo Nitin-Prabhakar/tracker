@@ -4,6 +4,7 @@ require_once "PHPWord.php";
 class trackerController {
 
 	private $oReader;
+    public $client;
 	public $sTargetFile;
 	private $oModel;
 	public $aPoliceVerification;
@@ -21,12 +22,9 @@ class trackerController {
     	$this->oReader->open($this->sTargetFile);
         foreach ($this->oReader->getSheetIterator() as $sheet) {
 		    foreach ($sheet->getRowIterator() as $row) {
+
                 $aRow = null;
 		    	for($i=0;$i<count($row);$i++){
-                    if(empty($row[$i])){
-                        $aRow = null;
-                        continue;
-                    }
 		    		if(gettype($row[$i])=="string"){
 		    			$aRow[$i] = iconv('UTF-8', 'ASCII//TRANSLIT',$row[$i]);
 		    		}else{
@@ -39,17 +37,14 @@ class trackerController {
 		    }
 		}
 		$this->oReader->close();
-		//create named columns from rows[0]
-        //echo "<pre>";
-        //print_r($rows);
+		//create named columns from rows[0] as keys
 
 		for ($i=1;$i<count($rows);$i++){
 			for($j=0;$j<count($rows[0]);$j++){
-				//echo $rows[$i][$j];
 				$key= strtolower($rows[0][$j]);
-				//echo $key."\n";
 				if(in_array($key, ["dob","deliverydate"])){
 					if(gettype($rows[$i][$j])=="integer"){
+                        //convert excel date to structured date
                             $timestamp = ($rows[$i][$j] - 25569) * 86400;
                             $namedCols[$i][$rows[0][$j]] = date("Y-m-d",$timestamp);
                     }else{
@@ -60,6 +55,7 @@ class trackerController {
 				else{
 				 $namedCols[$i][$rows[0][$j]] = $rows[$i][$j];
 				}
+
 			}
 		}
 		$this->aTracker = $namedCols;
@@ -72,9 +68,8 @@ class trackerController {
     }
 
     Private function loadTracker(){
-    	//print_r($this->aTracker);
 
-    	$this->oModel->load($this->aTracker);
+    	//$this->oModel->load($this->aTracker);
     }
 
     public function __getTracker(){
@@ -89,12 +84,25 @@ class trackerController {
     			$k1=null;
     			$sK = strtolower($k);
     			switch($sK){
+                    case "contact":
+                        $k1 = "Contact Number";
+                        $v1 = $v;
+                        break;
+                    case "customer-id":
+                        $k1 = "Customer ID";
+                        $v1 = $v;
+                        break;
     				case "reference":
     					$k1 = "Ref. No";
                         $v1 = $v;
     					break;
     				case "applicant":
-    					$k1 = "Applicant's name";
+                        if($this->client=="PAMAC"){
+                            $k1 = "Name of the Subject";
+                        }
+                        else{
+    					    $k1 = "Applicant's name";
+                        }
                         $v1 = $v;
     					break;
     				case "father":
@@ -107,7 +115,12 @@ class trackerController {
                         $v1 = date("d-M-Y",$timestamp);
     					break;
     				case "deliverydate":
-    					$k1 = "Date of information from police station";
+                        if($this->client=="PAMAC"){
+                            $k1 = "Date of Verification";
+                        }
+                        else{
+    					    $k1 = "Date of information from police station";
+                        }
                         $timestamp = strtotime($v);
                         $v1 = date("d-M-Y",$timestamp);
     					break;
@@ -126,9 +139,6 @@ class trackerController {
     		$this->aPoliceVerification[$key]["Number of years covered in the police verification"] = "Last 2 years";
     		$this->aPoliceVerification[$key]["Verification remarks"] = "No records";
     	}
-    	//print_r($this->aTracker);
-		//print_r($this->aPoliceVerification);
-		//print_r($this->aCourtVerification);
 
     }
 

@@ -5,13 +5,22 @@ class trackerModel{
 
 	public $db = null;
 	private $aColumns = [
+		"Client",
 		"Reference",
+		"Customer-id",
 		"Applicant",
 		"Father",
 		"DOB",
 		"Address",
+		"Contact",
 		"Deliverydate"
 	];
+	private $aRelatives = [
+		"Client"=>[
+						"table"=>"Clients",
+						"key"=>"client"
+				  ]
+	]
 
 	function __construct(){
 
@@ -37,11 +46,19 @@ class trackerModel{
 			$this->db->link->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 			try{
-				$sSql = $this->db->link->prepare("INSERT INTO trackerapp ({$sColumns}) VALUES ({$sBoundColumns})");
+				$sSql = $this->db->link->prepare("INSERT INTO trackers ({$sColumns}) VALUES ({$sBoundColumns})");
 				foreach($this->aColumns as $key=>$value){
+					if(!isset($aRow[$value])){
+						$aRow[$value] = null;
+					}
+					if(array_key_exists($value, $this->aRelatives)){
+						$tab = $this->aRelatives[$value]['table'];
+						$col = $this->aRelatives[$value]['key'];
+						$sFkQuery =
+					}
 					$sSql->bindParam(":$value", $aRow[$value]);
 				}
-				$sSql->execute();
+				//$sSql->execute();
 			}catch(PDOException $e){
 
 				echo "Error: " . $e->getMessage();
