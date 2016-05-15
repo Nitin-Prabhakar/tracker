@@ -225,9 +225,9 @@ class trackerController {
 
         $sectionHeader = $section->addTable('customStyledSectionHeaders');
         $sectionHeader->addRow();
-        $sectionHeader->addCell(4000)->addText('');
-        $sectionHeader->addCell(2000)->addText('Result',array('name'=>'Calibri', 'size'=>'10','bold'=>true,'align'=>'center'));
-        $sectionHeader->addCell(4000)->addText('');
+        $sectionHeader->addCell(2000)->addText('');
+        $sectionHeader->addCell(6000)->addText('Result',array('name'=>'Calibri', 'size'=>'10','bold'=>true,'align'=>'center'));
+        $sectionHeader->addCell(2000)->addText('');
 
 
 
@@ -248,62 +248,60 @@ class trackerController {
     		$table->addCell(5000)->addText(" No records");
         }
         if($this->client=="PAMAC"){
-            $sectionHeader = $section->addTable('customStyledSectionHeaders');
-            $sectionHeader->addRow();
-            $sectionHeader->addCell(2000)->addText('');
-            $sectionHeader->addCell(6000)->addText('Civil Proceedings: Original Suit / Miscellaneous Suit / Execution / Arbitration Case',array('name'=>'Calibri', 'size'=>'10','bold'=>true,'align'=>'center'));
-            $sectionHeader->addCell(2000)->addText('');
-            $table = $section->addTable('customStyledTable');
-
-            $table->addRow();
-            $table->addCell(5000)->addText("Court",array('name'=>'Calibri', 'size'=>'10','bold'=>true,'align'=>'center'));
-            $table->addCell(5000)->addText("Jurisdiction",array('name'=>'Calibri', 'size'=>'10','bold'=>true,'align'=>'center'));
-            $table->addCell(5000)->addText("Name of Court",array('name'=>'Calibri', 'size'=>'10','bold'=>true,'align'=>'center'));
-            $table->addCell(5000)->addText("Result",array('name'=>'Calibri', 'size'=>'10','bold'=>true,'align'=>'center'));
-
-            $table->addRow();
-            $table->addCell(5000)->addText(" Civil Court");
-            $table->addCell(5000)->addText(" ");
-            $table->addCell(5000)->addText(" ");
-            $table->addCell(5000)->addText(" No records");
-
-            $table->addRow();
-            $table->addCell(5000)->addText(" High Court");
-            $table->addCell(5000)->addText(" ");
-            $table->addCell(5000)->addText(" ");
-            $table->addCell(5000)->addText(" No records");
 
             $sectionHeader = $section->addTable('customStyledSectionHeaders');
             $sectionHeader->addRow();
-            $sectionHeader->addCell(500)->addText('');
-            $sectionHeader->addCell(9000)->addText('Criminal Proceedings: Criminal Petitions / Criminal Appeal / Sessions Case /Special Sessions Case / Criminal Miscellaneous Petition / Criminal Revision Appeal',array('name'=>'Calibri', 'size'=>'10','bold'=>true,'align'=>'center'));
-            $sectionHeader->addCell(500)->addText('');
+            $sectionHeader->addCell(2000)->addText('');
+            $sectionHeader->addCell(8000)->addText('Civil Proceedings: Original Suit / Miscellaneous Suit /Execution / Arbitration Case',array('name'=>'Calibri', 'size'=>'10','bold'=>true,'align'=>'center'));
+            $table = $section->addTable('customStyledTable');
+
+            $table->addRow();
+            $table->addCell(3000)->addText("Court",array('name'=>'Calibri', 'size'=>'10','bold'=>true,'align'=>'center'));
+            $table->addCell(7000)->addText("Jurisdiction",array('name'=>'Calibri', 'size'=>'10','bold'=>true,'align'=>'center'));
+            $table->addCell(7000)->addText("Name of Court",array('name'=>'Calibri', 'size'=>'10','bold'=>true,'align'=>'center'));
+            $table->addCell(3000)->addText("Result",array('name'=>'Calibri', 'size'=>'10','bold'=>true,'align'=>'center'));
+
+            $table->addRow();
+            $table->addCell(3000)->addText(" Civil Court");
+            $table->addCell(7000)->addText(" ");
+            $table->addCell(7000)->addText(" City Civil Court");
+            $table->addCell(3000)->addText(" No records");
+
+            $table->addRow();
+            $table->addCell(3000)->addText(" High Court");
+            $table->addCell(7000)->addText(" ");
+            $table->addCell(7000)->addText(" High Court ");
+            $table->addCell(3000)->addText(" No records");
+
+            $sectionHeader = $section->addTable('customStyledSectionHeaders');
+            $sectionHeader->addRow();
+            $sectionHeader->addCell(10000)->addText('Criminal Proceedings: Criminal Petitions / Criminal Appeal / Sessions Case /Special Sessions Case / Criminal Miscellaneous Petition / Criminal Revision Appeal',array('name'=>'Calibri', 'size'=>'10','bold'=>true,'align'=>'center'));
 
             $table = $section->addTable('customStyledTable');
 
             $table->addRow();
-            $table->addCell(5000)->addText("Court",array('name'=>'Calibri', 'size'=>'10','bold'=>true,'align'=>'center'));
-            $table->addCell(5000)->addText("Jurisdiction",array('name'=>'Calibri', 'size'=>'10','bold'=>true,'align'=>'center'));
-            $table->addCell(5000)->addText("Name of Court",array('name'=>'Calibri', 'size'=>'10','bold'=>true,'align'=>'center'));
-            $table->addCell(5000)->addText("Result",array('name'=>'Calibri', 'size'=>'10','bold'=>true,'align'=>'center'));
+            $table->addCell(3000)->addText("Court",array('name'=>'Calibri', 'size'=>'10','bold'=>true,'align'=>'center'));
+            $table->addCell(7000)->addText("Jurisdiction",array('name'=>'Calibri', 'size'=>'10','bold'=>true,'align'=>'center'));
+            $table->addCell(7000)->addText("Name of Court",array('name'=>'Calibri', 'size'=>'10','bold'=>true,'align'=>'center'));
+            $table->addCell(3000)->addText("Result",array('name'=>'Calibri', 'size'=>'10','bold'=>true,'align'=>'center'));
 
             $table->addRow();
-            $table->addCell(5000)->addText(" Magistrate Court");
-            $table->addCell(5000)->addText(" ");
-            $table->addCell(5000)->addText(" ");
-            $table->addCell(5000)->addText(" No records");
+            $table->addCell(3000)->addText(" Magistrate Court");
+            $table->addCell(7000)->addText(" ");
+            $table->addCell(7000)->addText(" Criminal Cases(CC), Private Complaint Report (PCR) ");
+            $table->addCell(3000)->addText(" No records");
 
             $table->addRow();
-            $table->addCell(5000)->addText(" Sessions Court");
-            $table->addCell(5000)->addText(" ");
-            $table->addCell(5000)->addText(" ");
-            $table->addCell(5000)->addText(" No records");
+            $table->addCell(3000)->addText(" Sessions Court");
+            $table->addCell(7000)->addText(" ");
+            $table->addCell(7000)->addText(" Criminal Appeals");
+            $table->addCell(3000)->addText(" No records");
 
             $table->addRow();
-            $table->addCell(5000)->addText(" High Court");
-            $table->addCell(5000)->addText(" ");
-            $table->addCell(5000)->addText(" ");
-            $table->addCell(5000)->addText(" No records");
+            $table->addCell(3000)->addText(" High Court");
+            $table->addCell(7000)->addText(" ");
+            $table->addCell(7000)->addText(" Criminal Appeals");
+            $table->addCell(3000)->addText(" No records");
 
 
         }
