@@ -17,6 +17,7 @@ if(isset( $_FILES ) && !empty($_FILES) && isset($_POST)){
 
 	$oTracker->sFolder = "trackers/{$oTracker->client}/{$sName}/".time()."/";
 
+
 	if (!file_exists( $oTracker->sFolder )) {
 		mkdir($oTracker->sFolder,0777,true);
 	}
@@ -40,6 +41,18 @@ if(isset( $_FILES ) && !empty($_FILES) && isset($_POST)){
 
 		$oTracker->writeFromTracker($key);
 	}
+	$zip = new ZipArchive();
+
+	if($zip->open("{$oTracker->sFolder}/tracker.zip", ZIPARCHIVE::CREATE)!==TRUE){
+		die("Could not create archive");
+	}
+	$iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator("{$oTracker->sFolder}"));
+	echo "<pre>";
+	foreach ($iterator as $key=>$value) {
+		echo realpath($key)."\n\n";
+		$zip->addFile(realpath($key), $key) or die ("ERROR: Could not add file: $key");
+	}
+	$zip->close();
 }
 
 ?>
