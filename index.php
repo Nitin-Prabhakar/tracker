@@ -17,6 +17,7 @@ if(isset( $_FILES ) && !empty($_FILES) && isset($_POST)){
 
 	$oTracker->sFolder = "trackers/{$oTracker->client}/{$sName}/".time()."/";
 
+	//rmdir("trackers/{$oTracker->client}");
 
 	if (!file_exists( $oTracker->sFolder )) {
 		mkdir($oTracker->sFolder,0777,true);
@@ -43,7 +44,9 @@ if(isset( $_FILES ) && !empty($_FILES) && isset($_POST)){
 	}
 	$zip = new ZipArchive();
 
-	if($zip->open("{$oTracker->sFolder}/{$sName}.zip", ZIPARCHIVE::CREATE)!==TRUE){
+	$sZipName = $oTracker->sFolder.'/'.$oTracker->client.'-'.$sName.'.zip';
+
+	if($zip->open($sZipName, ZIPARCHIVE::CREATE)!==TRUE){
 		die("Could not create archive");
 	}
 	$iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator("{$oTracker->sFolder}"));
@@ -52,17 +55,43 @@ if(isset( $_FILES ) && !empty($_FILES) && isset($_POST)){
 		//echo realpath($key)."\n\n";
 		$zip->addFile(realpath($key), $key) or die ("ERROR: Could not add file: $key");
 	}
-	$file  = "{$oTracker->sFolder}/{$sName}.zip";
 	$zip->close();
+	echo $file = $sZipName;
 	header('Content-Description: File Transfer');
-    header('Content-Type: application/octet-stream');
+    header('Content-Type: application/zip');
     header('Content-Disposition: attachment; filename="'.basename($file).'"');
-    header('Expires: 0');
     header('Cache-Control: must-revalidate');
-    header('Pragma: public');
-    header('Content-Length: ' . filesize($file));
     readfile($file);
-    exit;
+    flush();
+
+
+
+
+
+    function deleteDirectory($dir) {
+	    if (!file_exists($dir)) {
+	        return true;
+	    }
+
+	    if (!is_dir($dir)) {
+	        return unlink($dir);
+	    }
+
+	    foreach (scandir($dir) as $item) {
+	        if ($item == '.' || $item == '..') {
+	            continue;
+	        }
+
+	        if (!deleteDirectory($dir . DIRECTORY_SEPARATOR . $item)) {
+	            return false;
+	        }
+
+	    }
+
+	    return rmdir($dir);
+	}
+	deleteDirectory($oTracker->sFolder);
+	deleteDirectory("trackers/{$oTracker->client}");
 }
 
 ?>
