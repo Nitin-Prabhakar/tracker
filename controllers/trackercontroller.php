@@ -14,7 +14,7 @@ class trackerController {
 
     function __construct($oReader){
     	$this->oReader = $oReader;
-    	$this->oModel = new trackerModel;
+    	//$this->oModel = new trackerModel;
     }
 
     Private function readTracker() {
@@ -64,7 +64,7 @@ class trackerController {
     function readAndLoadTracker(){
 
     	$this->readTracker();
-    	$this->loadTracker();
+    	//$this->loadTracker();
     }
 
     Private function loadTracker(){
