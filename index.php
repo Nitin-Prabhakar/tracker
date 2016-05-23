@@ -56,11 +56,13 @@ if(isset( $_FILES ) && !empty($_FILES) && isset($_POST)){
 		$zip->addFile(realpath($key), $key) or die ("ERROR: Could not add file: $key");
 	}
 	$zip->close();
-	echo $file = $sZipName;
+	$file = $sZipName;
 	header('Content-Description: File Transfer');
-    header('Content-Type: application/zip');
+    header('Content-Type: application/octet-stream');
     header('Content-Disposition: attachment; filename="'.basename($file).'"');
     header('Cache-Control: must-revalidate');
+    header('Pragma: public');
+    header('Content-Length: ' . filesize($file));
     readfile($file);
     flush();
 
