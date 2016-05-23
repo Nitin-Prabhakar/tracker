@@ -152,6 +152,8 @@ class trackerController {
         $oPHPWord->addTableStyle('customStyledSectionHeaders', $styleTableSectionHeaders);
 
 		$oPHPWord->addParagraphStyle('pStyle', array('align'=>'left', 'size'=>11, 'spaceAfter'=>1, 'name'=>'Calibri', 'bold'=>true));
+        $oPHPWord->addFontStyle('rStyle', array('bold'=>true,'size'=>11));
+        $oPHPWord->addParagraphStyle('pHeaderStyle', array('align'=>'center','size'=>11, 'spaceAfter'=>100));
 
 		//Header
 
@@ -177,11 +179,7 @@ class trackerController {
 
 
         if($this->client=="A-Check"){
-            $sectionHeader = $section->addTable('customStyledSectionHeaders');
-            $sectionHeader->addRow();
-            $sectionHeader->addCell(4000)->addText('');
-            $sectionHeader->addCell(2000)->addText('Police Verification',array('name'=>'Calibri', 'size'=>'10','bold'=>true,'align'=>'center'));
-            $sectionHeader->addCell(4000)->addText('');
+            $section->addText("Police Verification",'rStyle', 'pHeaderStyle');
         }
 
 
@@ -197,15 +195,7 @@ class trackerController {
 
         if($this->client=="A-Check"){
          //Court Verification
-
-
-
-            $sectionHeader = $section->addTable('customStyledSectionHeaders');
-            $sectionHeader->addRow();
-            $sectionHeader->addCell(4000)->addText('');
-            $sectionHeader->addCell(2000)->addText('Court Verification',array('name'=>'Calibri', 'size'=>'10','bold'=>true,'align'=>'center'));
-            $sectionHeader->addCell(4000)->addText('');
-
+            $section->addText("Court Verification",'rStyle', 'pHeaderStyle');
 
             $table = $section->addTable('customStyledTable');
 
@@ -221,15 +211,7 @@ class trackerController {
 
         //Result
 
-
-
-        $sectionHeader = $section->addTable('customStyledSectionHeaders');
-        $sectionHeader->addRow();
-        $sectionHeader->addCell(4000)->addText('');
-        $sectionHeader->addCell(2000)->addText('Result',array('name'=>'Calibri', 'size'=>'10','bold'=>true,'align'=>'center'));
-        $sectionHeader->addCell(4000)->addText('');
-
-
+        $section->addText("Result",'rStyle', 'pHeaderStyle');
 
         if($this->client=="A-Check"){
 
@@ -249,12 +231,8 @@ class trackerController {
         }
         if($this->client=="PAMAC"){
 
-            /*$sectionHeader = $section->addTable('customStyledSectionHeaders');
-            $sectionHeader->addRow();
-            $sectionHeader->addCell(2000)->addText('');
-            $sectionHeader->addCell(8000)->addText('Civil Proceedings: Original Suit / Miscellaneous Suit /Execution / Arbitration Case',array('name'=>'Calibri', 'size'=>'10','bold'=>true,'align'=>'center'));*/
 
-            $section->addText('Civil Proceedings: Original Suit / Miscellaneous Suit /Execution / Arbitration Case',array('name'=>'Calibri', 'size'=>'10','bold'=>true,'align'=>'left'));
+            $section->addText('Civil Proceedings: Original Suit / Miscellaneous Suit /Execution / Arbitration Case','rStyle','pHeaderStyle');
 
             $table = $section->addTable('customStyledTable');
 
@@ -276,12 +254,8 @@ class trackerController {
             $table->addCell(5000)->addText(" High Court ");
             $table->addCell(5000)->addText(" No records");
 
-            /*$sectionHeader = $section->addTable('customStyledSectionHeaders');
-            $sectionHeader->addRow();
-            $sectionHeader->addCell(2000)->addText('');
-            $sectionHeader->addCell(8000)->addText('Criminal Proceedings: Criminal Petitions / Criminal Appeal / Sessions Case /Special Sessions Case / Criminal Miscellaneous Petition / Criminal Revision Appeal',array('name'=>'Calibri', 'size'=>'10','bold'=>true,'align'=>'center'));*/
 
-             $section->addText('Criminal Proceedings: Criminal Petitions / Criminal Appeal / Sessions Case /Special Sessions Case / Criminal Miscellaneous Petition / Criminal Revision Appeal',array('name'=>'Calibri', 'size'=>'10','bold'=>true,'align'=>'left'));
+             $section->addText('Criminal Proceedings: Criminal Petitions / Criminal Appeal / Sessions Case /Special Sessions Case / Criminal Miscellaneous Petition / Criminal Revision Appeal','rStyle','pHeaderStyle');
 
 
             $table = $section->addTable('customStyledTable');
