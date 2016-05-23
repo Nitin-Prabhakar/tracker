@@ -1,16 +1,24 @@
 <dom-module id="upload-form">
     <template>
+        <style type="text/css">
+            .client{
+                margin-top: 1em;
+            }
+        </style>
         <div class="jumbotron" id="uploader">
             <h1>{{customheader}}</h1>
             <form action="../index.php" method="post" enctype="multipart/form-data">
                 <div class="form-group">
     		      <input type="file" name="fileToUpload" id="fileToUpload">
-                  <ul>
+
+
+                  <ul class="client">
+                    <li><label>Choose Client</label></li>
                     <li>
-                        <input type="radio" name="client" value="PAMAC" checked>PAMAC</input>
+                        <input type="radio" name="client" value="PAMAC" checked>&nbsp;PAMAC</input>
                     </li>
                     <li>
-                        <input type="radio" name="client" value="A-Check">A-check</input>
+                        <input type="radio" name="client" value="A-Check">&nbsp;A-check</input>
                     </li>
                   </ul>
                 </div>
