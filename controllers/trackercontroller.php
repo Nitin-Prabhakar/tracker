@@ -46,8 +46,15 @@ class trackerController {
 					if(gettype($rows[$i][$j])=="integer"){
                         //convert excel date to structured date
                             $timestamp = ($rows[$i][$j] - 25569) * 86400;
-                            $namedCols[$i][$rows[0][$j]] = date("Y-m-d",$timestamp);
-                    }else{
+                            $namedCols[$i][$rows[0][$j]] = date("d-M-Y",$timestamp);
+                    }elseif (is_object($rows[$i][$j])) {
+                        # code...
+                        //echo "<pre>";
+                        $aDate = get_object_vars($rows[$i][$j]);
+                        $timestamp = strtotime($aDate['date']);
+                        $namedCols[$i][$rows[0][$j]] = date("d-M-Y",$timestamp);
+                    }
+                    else{
                             //throw exception
                             $namedCols[$i][$rows[0][$j]] = $rows[$i][$j];
                     }
@@ -104,8 +111,7 @@ class trackerController {
                         break;
     				case "dob":
     					$k1 = "Date of birth";
-                        $timestamp = strtotime($v);
-                        $v1 = date("d-M-Y",$timestamp);
+                        $v1 = $v;
     					break;
     				case "deliverydate":
                         if($this->client=="PAMAC"){
@@ -114,8 +120,7 @@ class trackerController {
                         else{
     					    $k1 = "Date of information from police station";
                         }
-                        $timestamp = strtotime($v);
-                        $v1 = date("d-M-Y",$timestamp);
+                        $v1 =$v;
                         //echo $v1;
     					break;
     				default:
