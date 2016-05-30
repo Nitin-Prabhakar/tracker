@@ -56,7 +56,8 @@ class trackerController {
                     }
                     else{
                             //throw exception
-                            $namedCols[$i][$rows[0][$j]] = $rows[$i][$j];
+                        $timestamp = strtotime($rows[$i][$j]);
+                        $namedCols[$i][$rows[0][$j]] = date("d-M-Y",$timestamp);
                     }
 				}
 				else{
