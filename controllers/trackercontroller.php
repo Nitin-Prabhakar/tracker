@@ -137,7 +137,7 @@ class trackerController {
         		$this->aPoliceVerification[$key]["Police station"] = "";
         		$this->aPoliceVerification[$key]["Ph no of Police station"] = "";
         		$this->aPoliceVerification[$key]["Designation of the interviewed police officer"] = "SHO (Station House Officer)";
-        		$this->aPoliceVerification[$key]["Number of years covered in the police verification"] = "Last 2 years";
+        		$this->aPoliceVerification[$key]["Number of years covered in the police verification"] = "Last 3 years";
         		$this->aPoliceVerification[$key]["Verification remarks"] = "No records";
             }
     	}
