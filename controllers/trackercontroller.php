@@ -115,7 +115,7 @@ class trackerController {
                         $v1 = $v;
     					break;
     				case "deliverydate":
-                        if($this->client=="PAMAC"){
+                        if($this->client!="A-Check"){
                             $k1 = "Date of Verification";
                         }
                         else{
@@ -175,7 +175,7 @@ class trackerController {
     		$section->addText('To',array('name'=>'Calibri', 'size'=>'10','bold'=>true,'align'=>'left'));
             $section->addText('M/s A-Check Global',array('name'=>'Calibri', 'size'=>'10','bold'=>true,'align'=>'left'));
         }
-        if($this->client=="PAMAC"){
+        else{
             $section->addText('To Whomsoever it may concern',array('name'=>'Calibri', 'size'=>'10','bold'=>true,'align'=>'left'));
         }
         $section->addText('This information is given with regard to the check conducted for:',array('name'=>'Calibri', 'size'=>'10','bold'=>true,'align'=>'left'));
@@ -234,9 +234,8 @@ class trackerController {
     		$table->addCell(5000)->addText(" Metropolitan Magistrate / Judicial Magistrate ");
     		$table->addCell(5000)->addText(" ---");
     		$table->addCell(5000)->addText(" No records");
-        }
-        if($this->client=="PAMAC"){
 
+        }else{
 
             $section->addText('Civil Proceedings: Original Suit / Miscellaneous Suit /Execution / Arbitration Case','rStyle','pHeaderStyle');
 
@@ -246,18 +245,27 @@ class trackerController {
             $table->addCell(5000)->addText("Court",array('name'=>'Calibri', 'size'=>'10','bold'=>true,'align'=>'center'));
             $table->addCell(5000)->addText("Jurisdiction",array('name'=>'Calibri', 'size'=>'10','bold'=>true,'align'=>'center'));
             $table->addCell(5000)->addText("Name of Court",array('name'=>'Calibri', 'size'=>'10','bold'=>true,'align'=>'center'));
+            if($this->client=="PCC"){
+                $table->addCell(5000)->addText("Duration covered",array('name'=>'Calibri', 'size'=>'10','bold'=>true,'align'=>'center'));
+            }
             $table->addCell(5000)->addText("Result",array('name'=>'Calibri', 'size'=>'10','bold'=>true,'align'=>'center'));
 
             $table->addRow();
             $table->addCell(5000)->addText(" Civil Court");
             $table->addCell(5000)->addText(" ");
             $table->addCell(5000)->addText(" City Civil Court");
+            if($this->client=="PCC"){
+                $table->addCell(5000)->addText(" 07 Years");
+            }
             $table->addCell(5000)->addText(" No records");
 
             $table->addRow();
             $table->addCell(5000)->addText(" High Court");
             $table->addCell(5000)->addText(" ");
             $table->addCell(5000)->addText(" High Court ");
+            if($this->client=="PCC"){
+                $table->addCell(5000)->addText(" 07 Years");
+            }
             $table->addCell(5000)->addText(" No records");
 
 
@@ -270,26 +278,69 @@ class trackerController {
             $table->addCell(3000)->addText("Court",array('name'=>'Calibri', 'size'=>'10','bold'=>true,'align'=>'center'));
             $table->addCell(7000)->addText("Jurisdiction",array('name'=>'Calibri', 'size'=>'10','bold'=>true,'align'=>'center'));
             $table->addCell(7000)->addText("Name of Court",array('name'=>'Calibri', 'size'=>'10','bold'=>true,'align'=>'center'));
+            if($this->client=="PCC"){
+                $table->addCell(3000)->addText("Duration covered",array('name'=>'Calibri', 'size'=>'10','bold'=>true,'align'=>'center'));
+            }
             $table->addCell(3000)->addText("Result",array('name'=>'Calibri', 'size'=>'10','bold'=>true,'align'=>'center'));
 
             $table->addRow();
             $table->addCell(3000)->addText(" Magistrate Court");
             $table->addCell(7000)->addText(" ");
             $table->addCell(7000)->addText(" Criminal Cases(CC), Private Complaint Report (PCR) ");
+            if($this->client=="PCC"){
+                $table->addCell(5000)->addText(" 07 Years");
+            }
             $table->addCell(3000)->addText(" No records");
 
             $table->addRow();
             $table->addCell(3000)->addText(" Sessions Court");
             $table->addCell(7000)->addText(" ");
             $table->addCell(7000)->addText(" Criminal Appeals");
+            if($this->client=="PCC"){
+                $table->addCell(5000)->addText(" 07 Years");
+            }
             $table->addCell(3000)->addText(" No records");
 
             $table->addRow();
             $table->addCell(3000)->addText(" High Court");
             $table->addCell(7000)->addText(" ");
             $table->addCell(7000)->addText(" Criminal Appeals");
+            if($this->client=="PCC"){
+                $table->addCell(5000)->addText(" 07 Years");
+            }
             $table->addCell(3000)->addText(" No records");
 
+            if($this->client=="PCC"){
+                $section->addTextBreak(1);
+
+                $table = $section->addTable('customStyledTable');
+                $table->addRow();
+                $table->addCell(5000)->addText("Name of the police station",array('name'=>'Calibri', 'size'=>'10','bold'=>true,'align'=>'center'));
+                $table->addCell(5000)->addText("Name & Designation of the verifier",array('name'=>'Calibri', 'size'=>'10','bold'=>true,'align'=>'center'));
+                $table->addCell(5000)->addText("Date of Verification",array('name'=>'Calibri', 'size'=>'10','bold'=>true,'align'=>'center'));
+                $table->addCell(5000)->addText("Police Station’s Contact No.",array('name'=>'Calibri', 'size'=>'10','bold'=>true,'align'=>'center'));
+                $table->addCell(5000)->addText("Period Covered",array('name'=>'Calibri', 'size'=>'10','bold'=>true,'align'=>'center'));
+                $table->addCell(5000)->addText("Remarks",array('name'=>'Calibri', 'size'=>'10','bold'=>true,'align'=>'center'));
+                $table->addRow();
+                $table->addCell(5000)->addText(" ");
+                $table->addCell(5000)->addText(" ");
+                $table->addCell(5000)->addText(" ");
+                $table->addCell(5000)->addText(" ");
+                $table->addCell(5000)->addText(" Upto 3 years");
+                $table->addCell(5000)->addText(" No records");
+
+                $section->addText('On line Verification (OCRC-Online Criminal Record Check):','rStyle','pHeaderStyle');
+                $table = $section->addTable('customStyledTable');
+                $table->addRow();
+                $table->addCell(5000)->addText("Disposed Cases",array('name'=>'Calibri', 'size'=>'10','bold'=>true,'align'=>'center'));
+                $table->addCell(5000)->addText("Pending Cases",array('name'=>'Calibri', 'size'=>'10','bold'=>true,'align'=>'center'));
+                $table->addCell(5000)->addText("Remarks",array('name'=>'Calibri', 'size'=>'10','bold'=>true,'align'=>'center'));
+                $table->addRow();
+                $table->addCell(5000)->addText(" Original, Miscellaneous, Arbitration");
+                $table->addCell(5000)->addText(" For Civil & Criminal records");
+                $table->addCell(5000)->addText(" No Records");
+
+            }
 
         }
 
@@ -309,6 +360,13 @@ class trackerController {
             $section->addText('Conclusion: In conclusion, as on the date of this search, and as on the records of jurisdictional courts there is no Civil or criminal case instituted against the subject. The above search results are based on the registers of first information reports, in respect of criminal cases maintained in the above mentioned court /police station having jurisdiction over the police stations within whose limits the candidate is said to be residing. This report is based on the verbal confirmation given by the concerned authorities.',null,'pStyle');
 
             $section->addText('Disclaimer: Due care has been taken in conducting the search. The records are public records and the above search has been conducted on behalf of your good self, as per your instruction and at your request & the undersigned is not responsible for any errors, omissions or deletions,if any ,in the said court /police records .', null, 'pStyle');
+        }
+        if($this->client=="PCC"){
+            $section->addText('Note: This covers the Jurisdictional Civil Court, Magistrate Court, Session court, High Court, paid and Proprietary databases including law firm databases.',null,'pStyle');
+
+            $section->addText('Conclusion:  In conclusion, as on the date of this search, and as on the records of jurisdictional courts there is no Civil or criminal case instituted against the said subject. This report is based on the verbal confirmation of the concerned court / police authority, as upon the date on which It is so confirmed. Hence this information is subjective.',null,'pStyle');
+
+            $section->addText('Disclaimer: Due care has been taken in conducting the search.  The records are public records and the above search has been conducted on behalf of your good self, as per your instruction & at your request The undersigned is not responsible for any errors, omissions or deletions nor accepts any responsibility or liability for any damage or loss arising from the direct /indirect use of the information if any in the said court / police records. Please note that this is an information & not a certificate.', null, 'pStyle');
         }
 
 
