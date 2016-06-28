@@ -52,10 +52,14 @@ if(isset( $_FILES ) && !empty($_FILES) && isset($_POST)){
 	$iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator("{$oTracker->sFolder}"));
 	//echo "<pre>";
 	foreach ($iterator as $key=>$value) {
-		//echo realpath($key)."\n\n";
-		$zip->addFile(realpath($key), $key) or die ("ERROR: Could not add file: $key");
+		//echo($key)."\n\n";
+		if(!is_dir($key)){
+		 $zip->addFile(realpath($key), $key) or die ("ERROR: Could not add file: $key");
+		}
 	}
-	$zip->close();
+	if(!$zip->close()){
+		die("could not close archive");
+	}
 	$file = $sZipName;
 	header('Content-Description: File Transfer');
     header('Content-Type: application/octet-stream');
