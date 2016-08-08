@@ -183,8 +183,8 @@ class trackerController
 					break;
 
 				default:
-					$k1 = $k;
-					$v1 = $v;
+					$k1 = htmlspecialchars($k);
+					$v1 = htmlspecialchars($v);
 					}
 
 				$this->aPoliceVerification[$key][$k1] = $v1;
@@ -216,8 +216,7 @@ class trackerController
 
 		$styleTable = array(
 			'borderSize' => 6,
-			'borderColor' => '000',
-			'cellMargin' => 80
+			'borderColor' => '000'
 		);
 		$oPHPWord->addTableStyle('customStyledTable', $styleTable);
 
@@ -238,7 +237,7 @@ class trackerController
 		$fontStyle = new \PhpOffice\PhpWord\Style\Font();
 		$fontStyle->setBold(true);
 		$fontStyle->setName('Calibri');
-		$fontStyle->setSize(11);
+		$fontStyle->setSize(5);
 
 
 
@@ -250,7 +249,7 @@ class trackerController
 
 
 		$oPHPWord->addParagraphStyle($paragraphStyleName, array(
-			'alignment' => \PhpOffice\PhpWord\SimpleType\Jc::JUSTIFY,
+			'alignment' => \PhpOffice\PhpWord\SimpleType\Jc::LEFT,
 			'spaceAfter' => 100
 		));
 		$oPHPWord->addParagraphStyle($paraHeaderStyleName, array(
@@ -258,7 +257,8 @@ class trackerController
 			'spaceAfter' => 100
 		));
 		$oPHPWord->addParagraphStyle($sectionHeaderStyleName, array(
-			'alignment' => \PhpOffice\PhpWord\SimpleType\Jc::LEFT
+			'alignment' => \PhpOffice\PhpWord\SimpleType\Jc::LEFT,
+			'spaceAfter' => 100
 		));
 
 		// Header
@@ -274,7 +274,7 @@ class trackerController
 		));
 
 		// -------------End Header-----------------------
-		$section->addTextBreak(1);
+		//$section->addTextBreak(1);
 		if ($this->client == "A-Check")
 			{
 			$section->addText('To', $fontStyle);
@@ -284,11 +284,11 @@ class trackerController
 			{
 			$section->addText('To Whomsoever it may concern', $fontStyle);
 			}
-		$section->addTextBreak(1);
+		//$section->addTextBreak(1);
 		$section->addText('This information is given with regard to the check conducted for:', $fontStyle);
 
 		// Police Verification
-		$section->addTextBreak(1);
+		//$section->addTextBreak(1);
 		if ($this->client == "A-Check")
 			{
 			$section->addText("Police Verification", $fontStyle, $paraHeaderStyleName);
@@ -303,7 +303,7 @@ class trackerController
 			}
 
 		// ------------------End Police Verification--------------------------------
-		$section->addTextBreak(1);
+		//$section->addTextBreak(1);
 		if ($this->client == "A-Check")
 			{
 
@@ -317,7 +317,7 @@ class trackerController
 				$table->addCell(5000)->addText("{$index}", $fontStyle);
 				$table->addCell(5000)->addText("{$value}", $fontStyle);
 				}
-				$section->addTextBreak(1);
+			//	$section->addTextBreak(1);
 			}
 
 		// ------------------End Court Verification--------------------------------
@@ -374,7 +374,7 @@ class trackerController
 			$table->addCell(3000)->addText("No records", $fontStyle);
 			$section->addTextBreak(1);
 			$section->addText('Criminal Proceedings: Criminal Petitions / Criminal Appeal / Sessions Case /Special Sessions Case / Criminal Miscellaneous Petition / Criminal Revision Appeal', $fontStyle, $sectionHeaderStyleName);
-			$section->addTextBreak(1);
+			//$section->addTextBreak(1);
 			$table = $section->addTable('customStyledTable');
 			$table->addRow();
 			$table->addCell(3000)->addText("Court", $fontStyle);
@@ -434,9 +434,9 @@ class trackerController
 				$table->addCell(5000)->addText(" ");
 				$table->addCell(5000)->addText("Upto 3 years", $fontStyle);
 				$table->addCell(5000)->addText("No records", $fontStyle);
-				$section->addTextBreak(1);
-				$section->addText('On line Verification (OCRC-Online Criminal Record Check):', $fontStyle, $paraHeaderStyleName);
-				$section->addTextBreak(1);
+				//$section->addTextBreak(1);
+				$section->addText('On line Verification (OCRC-Online Criminal Record Check):', $fontStyle, $sectionHeaderStyleName);
+				//$section->addTextBreak(1);
 				$table = $section->addTable('customStyledTable');
 				$table->addRow();
 				$table->addCell(5000)->addText("Disposed Cases", $fontStyle);
@@ -462,7 +462,7 @@ class trackerController
 
 		if ($this->client == "PAMAC")
 			{
-			$section->addText('Conclusion: In conclusion, as on the date of this search, and as on the records of jurisdictional courts there is no Civil or criminal case instituted against the subject. The above search results are based on the registers of first information reports, in respect of criminal cases maintained in the above mentioned court /police station having jurisdiction over the police stations within whose limits the candidate is said to be residing. This report is based on the verbal confirmation given by the concerned authorities.', $fontStyle, $paragraphStyleName);
+			$section->addText('Conclusion: In conclusion, as on the date of this search, and as on the records of jurisdictional courts there is no Civil or criminal case instituted against the subject. The above search results are based on the registers of first information reports, in respect of criminal cases maintained in the above mentioned court / police station having jurisdiction over the police stations within whose limits the candidate is said to be residing. This report is based on the verbal confirmation given by the concerned authorities.', $fontStyle, $paragraphStyleName);
 			$section->addText('Disclaimer: Due care has been taken in conducting the search. The records are public records and the above search has been conducted on behalf of your good self, as per your instruction and at your request &amp; the undersigned is not responsible for any errors, omissions or deletions,if any ,in the said court /police records .', $fontStyle, $paragraphStyleName);
 			}
 
