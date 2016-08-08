@@ -486,7 +486,7 @@ class trackerController
 		));
 
 		// ----------------------------End Footer---------------------------------------
-		//$oPHPWord->getCompatibility()->setOoxmlVersion(14);
+		$oPHPWord->getCompatibility()->setOoxmlVersion(14);
 		$objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($oPHPWord, 'Word2007');
 		$objWriter->save($nameOfFile);
 		chmod($nameOfFile, 0777);
