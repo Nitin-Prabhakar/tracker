@@ -1,0 +1,7 @@
+{
+"require": {
+       "phpoffice/phpword": "v0.13.*",
+              "Box/Spout": "^2.5",
+              "dompdf/dompdf": "^0.7.0"
+    }
+}

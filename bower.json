@@ -1,0 +1,26 @@
+{
+  "name": "formatter",
+  "description": "excel importer and reported",
+  "main": "index.js",
+  "authors": [
+    "Nitin"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "formatter"
+  ],
+  "moduleType": [],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "^1.3.0",
+    "jquery": "^2.2.1",
+    "bootstrap": "^3.3.6"
+  }
+}
