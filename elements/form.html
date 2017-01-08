@@ -1,27 +1,23 @@
 <dom-module id="upload-form">
-  <template>
-    <style type="text/css">
 
-      .form-sslaw{
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-      }
-      .form-sslaw .client-list{
-        margin: 0;
-        padding: 0 1em 0 1em;
-      }
-      .client-list li label{
-        padding: 0 1em 0 0;
-        width:90%;
-        text-align:left;
-      }
-      .client-list li{
-        display: flex;
-        flex-wrap: nowrap;
-        justify-content: space-around;
-      }
-    </style>
+  <template>
+
+  <style>
+    :host{
+      display: block;
+      border: 0.1vmax outset #0db;
+    }
+    .sslaw{
+      font-family: var(--upload-form-font);
+    }
+    h1{
+      font-family: var(--upload-form-header);
+    }
+    label{
+      font-weight: var(--upload-form-label-weight);
+    }
+  </style>
+
     <div class="sslaw" id="uploader">
       <h1>{{customheader}}
       </h1>

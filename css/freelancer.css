@@ -91,6 +91,36 @@ header .intro-text .skills {
   font-size: 1.25em;
   font-weight: 300;
 }
+
+
+
+.form-sslaw{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.form-sslaw .client-list{
+  margin: 0;
+  padding: 0 1em 0 1em;
+}
+.client-list li label{
+  padding: 0 1em 0 0;
+  width:90%;
+  text-align:left;
+}
+.client-list li{
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+}
+upload-form h1{
+  margin:2em;
+}
+.form-sslaw input{
+
+}
+
+
 @media (min-width: 768px) {
   header .container {
     padding-top: 200px;

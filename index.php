@@ -157,11 +157,12 @@ if(isset( $_FILES ) && !empty($_FILES) && isset($_POST)){
     <link href="vendor-theme/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Theme CSS -->
-    <link href="css/freelancer.min.css" rel="stylesheet">
+    <link href="css/freelancer.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
     <link href="vendor-theme/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+		<link href="https://fonts.googleapis.com/css?family=Quicksand:400,700" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -177,6 +178,14 @@ if(isset( $_FILES ) && !empty($_FILES) && isset($_POST)){
 		<link rel="import" href="bower_components/polymer/polymer.html">
 
 		<link rel="import" href="elements/form.html">
+
+		<style is="custom-style">
+				:root{
+					--upload-form-font:'Quicksand', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+					--upload-form-header:'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+					--upload-form-label-weight: bolder;
+				}
+		</style>
 </head>
 
 <body id="page-top" class="index">
