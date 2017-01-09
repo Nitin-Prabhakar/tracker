@@ -1,3 +1,4 @@
+<link rel="import" href="modal.html">
 <dom-module id="upload-form">
 
   <template>
@@ -44,6 +45,7 @@
 </div>
 </form>
 </div>
+<modal-popup date={{date}} count={{count}}></modal-popup>
 </template>
 <style type="text/css">
   li{
@@ -52,6 +54,15 @@
   }
 </style>
 <script>
+function clickHandler() {
+    $(document).ready(function() {
+      var id = "modal_payment_reminder";
+      var dialog = document.getElementById(id);
+      if (dialog) {
+          dialog.open();
+      }
+  });
+}
   Polymer({
     is: "upload-form",
     properties:{
@@ -59,6 +70,31 @@
         type:String,
         value:"Hello world"
       }
+    },
+    properties:{
+      date:{
+        type:Object,
+        value: function(){
+          var today = new Date();
+          var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+          return date;
+        },
+        notify:true
+      },
+      count:{
+        type:Object,
+        value:function(){
+          var today = new Date();
+          var inaguration = new Date("2017-01-17"); //new Date(today.getFullYear()+'-'+(today.getMonth()+1)+'-'+(today.getDate()+4));
+          var timeDiff = Math.abs(inaguration.getTime() - today.getTime());
+          var diff = Math.ceil(timeDiff / (1000 * 3600 * 24));
+          return diff;
+        },
+        notify:true
+      }
+    },
+    ready:function(){
+      clickHandler();
     }
   }
          );
