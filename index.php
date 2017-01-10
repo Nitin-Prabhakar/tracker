@@ -151,7 +151,9 @@ if(isset( $_FILES ) && !empty($_FILES) && isset($_POST)){
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SSLAW TRACKER AUTOMATOR</title>
+    <title>SSLAW Tracker Automator</title>
+
+		<link rel="icon" type="image/png" href="favicon-custom.png">
 
     <!-- Bootstrap Core CSS -->
     <link href="vendor-theme/bootstrap/css/bootstrap.min.css" rel="stylesheet">
