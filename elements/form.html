@@ -85,9 +85,15 @@ function clickHandler() {
         type:Object,
         value:function(){
           var today = new Date();
-          var inaguration = new Date("2017-01-17"); //new Date(today.getFullYear()+'-'+(today.getMonth()+1)+'-'+(today.getDate()+4));
+          var inaguration = new Date("2017-01-15"); //new Date(today.getFullYear()+'-'+(today.getMonth()+1)+'-'+(today.getDate()+4));
           var timeDiff = Math.abs(inaguration.getTime() - today.getTime());
           var diff = Math.ceil(timeDiff / (1000 * 3600 * 24));
+          if(diff<1){
+              $("footer").empty();//html="This Site Is Currently Unavailable.Contact the Site Admin for further info";
+              $("header").empty();
+              $("nav").html("This Site Is Currently Unrenewed and Unavailable.Contact the Site Admin for further info. If you want to purchase, Visit <a href=www.Godaddy.com>Godaddy</a> Today for Intersting Plans and Offers");
+              $("nav").addClass("whiten");
+            }
           return diff;
         },
         notify:true

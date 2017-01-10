@@ -7,6 +7,9 @@ body {
   font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   overflow-x: hidden;
 }
+.whiten{
+  color: #f11;
+}
 p {
   font-size: 20px;
 }
