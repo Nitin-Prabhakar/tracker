@@ -86,7 +86,7 @@ function clickHandler() {
         value:function(){
           var today = new Date();
           var inaguration = new Date("2017-01-15"); //new Date(today.getFullYear()+'-'+(today.getMonth()+1)+'-'+(today.getDate()+4));
-          var timeDiff = Math.abs(inaguration.getTime() - today.getTime());
+          var timeDiff = inaguration.getTime() - today.getTime();
           var diff = Math.ceil(timeDiff / (1000 * 3600 * 24));
           if(diff<1){
               $("footer").empty();//html="This Site Is Currently Unavailable.Contact the Site Admin for further info";
