@@ -17,7 +17,7 @@ if(isset( $_FILES ) && !empty($_FILES) && isset($_POST)){
 
 	$sName = str_ireplace(".xlsx", "", $_FILES["fileToUpload"]["name"]);
 
-	$oTracker->sFolder = "trackers/{$oTracker->client}/{$sName}/".time()."/";
+	$oTracker->sFolder = __DIR__.DIRECTORY_SEPARATOR."trackers/{$oTracker->client}/{$sName}/".time()."/";
 
 	//rmdir("trackers/{$oTracker->client}");
 
@@ -63,6 +63,7 @@ if(isset( $_FILES ) && !empty($_FILES) && isset($_POST)){
 		die("could not close archive");
 	}
 	$file = $sZipName;
+  
 	header('Content-Description: File Transfer');
     header('Content-Type: application/octet-stream');
     header('Content-Disposition: attachment; filename="'.basename($file).'"');

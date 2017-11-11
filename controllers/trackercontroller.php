@@ -139,7 +139,7 @@ class trackerController
 				switch ($sK)
 					{
 				case "reference":
-					$k1 = "Ref. No.";
+					$k1 = "Ref No.";
 					$v1 = $v;
 					break;
 
@@ -150,7 +150,7 @@ class trackerController
 						}
 					  else
 						{
-						$k1 = "Applicant's name";
+						$k1 = "Name of the candidate";
 						}
 
 					$v1 = $v;
@@ -162,7 +162,7 @@ class trackerController
 					break;
 
 				case "dob":
-					$k1 = "Date of birth";
+					$k1 = "Date of Birth";
 					$v1 = $v;
 					break;
 
@@ -181,6 +181,11 @@ class trackerController
 					// echo $v1;
 
 					break;
+          case 'father':
+            # code...
+            $k1 = "Father’s Name";
+            $v1 = $v;
+            break;
 
 				default:
 					$k1 = htmlspecialchars($k);
@@ -210,7 +215,7 @@ class trackerController
 	function writeFromTracker($key)
 		{
 		$oPHPWord = new \PhpOffice\PhpWord\PhpWord();
-		$nameOfFile = $this->sFolder . $this->aTracker[$key]['Name'] . uniqid() . '.docx';
+		$nameOfFile = $this->sFolder . trim($this->aTracker[$key]['name']) . uniqid() . '.docx';
 
 		// Define table style arrays
 
@@ -285,7 +290,10 @@ class trackerController
 			$section->addText('To Whomsoever it may concern', $fontStyle);
 			}
 		//$section->addTextBreak(1);
-		$section->addText('This information is given with regard to the check conducted for:', $fontStyle);
+    if ($this->client == "A-Check")
+    $section->addText('This information is given with regard to the check conducted for:', $fontStyle);
+    else
+		$section->addText('This information is given with regard to the search conducted for:', $fontStyle);
 
 		// Police Verification
 		//$section->addTextBreak(1);
@@ -456,21 +464,22 @@ class trackerController
 		if ($this->client == "A-Check")
 			{
 			$section->addText("On line verification :Verified online litigation database and found none matching with the provided applicant's details", $fontStyle, $paragraphStyleName);
-			$section->addText('Conclusion: In conclusion,as on the date of this search, and as on the records of jurisdictional courts there  is  no Civil or criminal case instituted against the subject .This report is based on the verbal confirmation of the concerned  court /police authority, having  jurisdiction over the police station  within  Whose  limits  the candidate  is said  to be  residing  as  upon the date on which it is confirmed. Hence this information is subjective', $fontStyle, $paragraphStyleName);
-			$section->addText('Disclaimer:Due care has been taken in conducting the search. The records are public records and theabove search has been  conducted  on behalf of your good self,as per your instruction and at your request &amp; the undersigned is not responsible for any errors, omissions or deletions, if any ,in  the said court / police records. Please note that this is an information not a certificate', $fontStyle, $paragraphStyleName);
+			$section->addText('Conclusion: In conclusion,as on the date of this search, and as on the records of jurisdictional courts there  is  no Civil or criminal case instituted against the subject .This report is based on the verbal confirmation of the concerned jurisdictional  court /police authority, as  upon the date on which it is confirmed. Please note that this is an information and not a certificate.', $fontStyle, $paragraphStyleName);
+			// $section->addText('Disclaimer:Due care has been taken in conducting the search. The records are public records and theabove search has been  conducted  on behalf of your good self,as per your instruction and at your request &amp; the undersigned is not responsible for any errors, omissions or deletions, if any ,in  the said court / police records. Please note that this is an information not a certificate', $fontStyle, $paragraphStyleName);
 			}
 
 		if ($this->client == "PAMAC")
 			{
-			$section->addText('Conclusion: In conclusion, as on the date of this search, and as on the records of jurisdictional courts there is no Civil or criminal case instituted against the subject. The above search results are based on the registers of first information reports, in respect of criminal cases maintained in the above mentioned court / police station having jurisdiction over the police stations within whose limits the candidate is said to be residing. This report is based on the verbal confirmation given by the concerned authorities.', $fontStyle, $paragraphStyleName);
-			$section->addText('Disclaimer: Due care has been taken in conducting the search. The records are public records and the above search has been conducted on behalf of your good self, as per your instruction and at your request &amp; the undersigned is not responsible for any errors, omissions or deletions,if any ,in the said court /police records .', $fontStyle, $paragraphStyleName);
+        $section->addText('Note – This covers the Jurisdictional Civil Court, Magistrate Court, Session court,High Court, paid  and Proprietary databases including law firm databases.', $fontStyle, $paragraphStyleName);
+  			$section->addText('Conclusion:In conclusion, as on the date of this search, and as on the records of jurisdictional courts there is no Civil or criminal case instituted against the said  subject. This report is based on the verbal confirmation of the concerned court / police authority, as upon the date on which It is so confirmed. Please note that this is an information not a certificate.', $fontStyle, $paragraphStyleName);
+  			// $section->addText('Disclaimer: Due care has been taken in conducting the search.  The records are public records and the above search has been conducted on behalf of your good self, as per your instruction &amp; at your request The undersigned is not responsible for any errors, omissions or deletions nor accepts any responsibility or liability for any damage or loss arising from the direct /indirect use of the information if any in the said court / police records. Please note that this is an information &amp; not a certificate.', $fontStyle, $paragraphStyleName);
 			}
 
 		if ($this->client == "PCC")
 			{
-			$section->addText('Note: This covers the Jurisdictional Civil Court, Magistrate Court, Session court, High Court, paid and Proprietary databases including law firm databases.', $fontStyle, $paragraphStyleName);
-			$section->addText('Conclusion:  In conclusion, as on the date of this search, and as on the records of jurisdictional courts there is no Civil or criminal case instituted against the said subject. This report is based on the verbal confirmation of the concerned court / police authority, as upon the date on which It is so confirmed. Hence this information is subjective.', $fontStyle, $paragraphStyleName);
-			$section->addText('Disclaimer: Due care has been taken in conducting the search.  The records are public records and the above search has been conducted on behalf of your good self, as per your instruction &amp; at your request The undersigned is not responsible for any errors, omissions or deletions nor accepts any responsibility or liability for any damage or loss arising from the direct /indirect use of the information if any in the said court / police records. Please note that this is an information &amp; not a certificate.', $fontStyle, $paragraphStyleName);
+			$section->addText('Note – This covers the Jurisdictional Civil Court, Magistrate Court, Session court,High Court, paid  and Proprietary databases including law firm databases.', $fontStyle, $paragraphStyleName);
+			$section->addText('Conclusion:In conclusion, as on the date of this search, and as on the records of jurisdictional courts there is no Civil or criminal case instituted against the said  subject. This report is based on the verbal confirmation of the concerned court / police authority, as upon the date on which It is so confirmed. Please note that this is an information not a certificate.', $fontStyle, $paragraphStyleName);
+			// $section->addText('Disclaimer: Due care has been taken in conducting the search.  The records are public records and the above search has been conducted on behalf of your good self, as per your instruction &amp; at your request The undersigned is not responsible for any errors, omissions or deletions nor accepts any responsibility or liability for any damage or loss arising from the direct /indirect use of the information if any in the said court / police records. Please note that this is an information &amp; not a certificate.', $fontStyle, $paragraphStyleName);
 			}
 
 		// ---------------------------_------End Disclaimer--------------------------_-

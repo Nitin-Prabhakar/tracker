@@ -1,80 +1,82 @@
 <link rel="import" href="../bower_components/paper-dialog/paper-dialog.html">
 <dom-module id="modal-popup">
-  <template>
-    <style>
-        hr{
-          line-height: var(--hr-ln-height);
-          height:var(--hr-height,0);
-          display: var(--hr-display,block);
-        }
-        hr.star-primary:after{
-          line-height: var(--star-primary-ln-ht,initial);
-        }
-        :host *{
-          font-family:var(--modal-font-family,"Quicksand", Helvetica, Arial, sans-serif);
-        }
-        :host h2,
-        :host hr{
-          font-family:'Lato', Helvetica, Arial, sans-serif;
-          font-weight: bold;
-          color: #ff1a1a;
-          border-color:#ff1a1a;
-        }
-        :host P{
-          font-variant: small-caps;
-        }
-    </style>
-      <div class="modal-popup">
-        <paper-dialog id="modal_payment_reminder">
-          <h2>Attention</h2>
-          <hr class="star-primary" />
-          <paper-dialog-scrollable>
-                <div class="row">
-                    <div class="col-lg-8 col-lg-offset-2">
-                        <div class="modal-body">
-                            <p>
-                              This Website is due for renewal in {{count}} days.Post which, you may not be able to browse on this page. If you are a regular user, and wish to continue using this website, Please Alert the Site's Admin.
-                              Reach them <strong><a href="mailto:pmitwithnitin@gmail.com">Here</a></strong>.
-                            </p>
-                            <ul class="list-inline item-details">
-                                <li>Client:
-                                    <strong><a href="http://www.godaddy.com">GoDaddy</a>
-                                    </strong>
-                                </li>
-                                <li>Date:
-                                    <strong><a href="#">{{date}}</a>
-                                    </strong>
-                                </li>
-                                <li>Service:
-                                    <strong><a href="http://www.godaddy.com">Web Hosting</a>
-                                    </strong>
-                                </li>
-                            </ul>
-                            <button type="button" class="btn btn-default" dialog-dismiss><i class="fa fa-times"></i> Close</button>
+    <template>
+        <style>
+            hr {
+                line-height: var(--hr-ln-height);
+                height: var(--hr-height,0);
+                display: var(--hr-display,block);
+            }
+            hr.star-primary:after {
+                line-height: var(--star-primary-ln-ht,initial);
+            }
+            :host * {
+                font-family: var(--modal-font-family,"Quicksand", Helvetica, Arial, sans-serif);
+            }
+            :host h2,
+            :host hr {
+                font-family: 'Lato', Helvetica, Arial, sans-serif;
+                font-weight: bold;
+                color: #ff1a1a;
+                border-color: #ff1a1a;
+            }
+            :host P {
+                font-variant: small-caps;
+            }
+        </style>
+        <div class="modal-popup">
+            <paper-dialog id="modal_payment_reminder">
+                <h2>Attention</h2>
+                <hr class="star-primary"/>
+                <paper-dialog-scrollable>
+                    <div class="row">
+                        <div class="col-lg-8 col-lg-offset-2">
+                            <div class="modal-body">
+                                <p>
+                                    This Website is due for renewal in
+                                    {{count}}
+                                    days.Post which, you may not be able to browse on this page. If you are a regular user, and wish to continue using this website, Please Alert the Site's Admin. Reach them
+                                    <strong>
+                                        <a href="mailto:pmitwithnitin@gmail.com">Here</a>
+                                    </strong>.
+                                </p>
+                                <ul class="list-inline item-details">
+                                    <li>Client:
+                                        <strong>
+                                            <a href="http://www.godaddy.com">GoDaddy</a>
+                                        </strong>
+                                    </li>
+                                    <li>Date:
+                                        <strong>
+                                            <a href="#">{{date}}</a>
+                                        </strong>
+                                    </li>
+                                    <li>Service:
+                                        <strong>
+                                            <a href="http://www.godaddy.com">Web Hosting</a>
+                                        </strong>
+                                    </li>
+                                </ul>
+                                <button type="button" class="btn btn-default" dialog-dismiss="dialog-dismiss">
+                                    <i class="fa fa-times"></i>
+                                    Close</button>
+                            </div>
                         </div>
                     </div>
-                </div>
-          </paper-dialog-scrollable>
-        </paper-dialog>
-      </div>
-  </template>
-  <script>
-    Polymer({
-      is:"modal-popup",
-      ready:function(){
-
-      },
-      properties:{
-        date:{
-          type:Object,
-          value:function(){}
-        },
-        count:{
-          type:Object,
-          value:function(){},
-          notify:true
-        }
-      }
-    });
-  </script>
+                </paper-dialog-scrollable>
+            </paper-dialog>
+        </div>
+    </template>
+    <script>
+        Polymer({
+            is: "modal-popup",
+            ready: function () {},
+            properties: {
+                date: {
+                    type: Object,
+                    value: function () {}
+                }
+            }
+        });
+    </script>
 </dom-module>
