@@ -63,7 +63,7 @@ if(isset( $_FILES ) && !empty($_FILES) && isset($_POST)){
 		die("could not close archive");
 	}
 	$file = $sZipName;
-  
+
 	header('Content-Description: File Transfer');
     header('Content-Type: application/octet-stream');
     header('Content-Disposition: attachment; filename="'.basename($file).'"');
@@ -211,7 +211,7 @@ if(isset( $_FILES ) && !empty($_FILES) && isset($_POST)){
                         <a href="#page-top"></a>
                     </li>
                     <li class="page-scroll">
-                        <a href="#portfolio">Portfolio</a>
+                        <a href="https://schrodingerscat.me">Home</a>
                     </li>
                     <li class="page-scroll">
                         <a href="#about">About</a>
